@@ -5,6 +5,60 @@ import java.util.Arrays;
 public class B {
     public static void main(String[] args) {
 
+        //    public static void main(String[] args) {
+//        System.out.println(Arrays.toString(" 100    ml " //вывод строки без пробелов
+//                .trim()
+//                .split("\\s+")));
+//    }
+//    public static void main(String[] args) {
+////        System.out.println(" 100    ml "
+////                .trim()  //убирает пробелы по краям      вывод строки 100
+////                .split("\\s+") [0]);
+////    }
+//        String s = " 100    ml "
+//                .trim()  //убирает пробелы по краям      вывод строки 100
+//                .split("\\s+") [0];
+//        System.out.println(s);
+//        int i = Integer.parseInt(s);
+//        System.out.println(i+10);
+//        String b = "12.3";                                //parsing String
+//        double v = Double.parseDouble(b);
+//        System.out.println(v+0.1);
+//
+//        int a=100;
+//        String s1 = String.valueOf(a);
+//        String s2 = ""+a;                      //перевод в строку
+        //}
+//    public static void main(String[] args) {
+//        //System.out.println(System.currentTimeMillis() + "@gmail.com");       // generate email
+//       String collect = new Random()
+//                .ints('A', 'z')
+//                .mapToObj(s->""+(char) s)// преобраз в строки
+//                .limit(5)
+//               // .forEach(s->System.out.print(s+ " ")); // write
+//               .collect(Collectors.joining(" ")); //собираем в строку
+//        System.out.println(collect);
+//    }
+//    public static void main(String[] args) {
+//        //System.out.println("4/2=" + 4 / 2 == "4/2=2"); //true
+//        System.out.println("asd".equals("asd"));
+//        System.out.println("asd"=="asd"); //неправильно                //сравнение строк
+//        String a = "aaa";
+//        String b = new String("aaa");
+//        System.out.println(a.equals(b));
+//        System.out.println(a==b); //неправильно
+//    }
+//    public static void main(String[] args) {
+////        byte b1 =50, b2 = -99;
+////        short k = b1 + b2;
+////        System.out.println("k =" + k);
+////    }
+//    public static void main(String[] args) {
+//        byte b1 =50, b2 = 99;
+//        byte k = b1 + b2;
+//        System.out.println("k =" + k);
+//    }
+
         /*String s =" 100    ml "
                 .trim()
                 .split("\\s+")[0];
