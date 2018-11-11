@@ -9,7 +9,7 @@ public class Home_task2 {
     public static void main(String[] args) {
 
         //Task_2
-        Scanner scan = new Scanner(System.in);
+        /*Scanner scan = new Scanner(System.in);
         System.out.print("Please enter quantity of numbers: ");
         Integer n = scan.nextInt();
 
@@ -23,7 +23,7 @@ public class Home_task2 {
         System.out.print("Please enter " + n + " whole numbers: ");
         Scanner scan1 = new Scanner(System.in);
         String vvod = scan1.nextLine();
-        String[] num = vvod.split(" ");
+        String[] num = vvod.split(" ");*/
 
         /*for (int i = 0; i < n; i++) {
             intnum[i] = Integer.parseInt(num[i]);
@@ -118,5 +118,72 @@ public class Home_task2 {
             System.out.println();
         }*/
 
+
+        //Task_2.9
+        //Ввести с консоли n-размерность матрицы a [n] [n].
+        //Задать значения элементов матрицы в интервале значений от -n до n с помощью датчика случайных чисел.
+        Scanner scan1 = new Scanner(System.in);
+        System.out.print("Please enter number of dimensions: ");
+        Integer n = scan1.nextInt();
+        Integer resArray1[][] = new Integer[n][n];
+        System.out.println("------ Initial matrix ------");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int a = new Random().ints(1, -n, n + 1).findFirst().getAsInt();
+                resArray1[i][j] = a;
+                System.out.print(resArray1[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        /*
+        Task_2.9.1
+        Упорядочить строки (столбцы) матрицы в порядке возрастания значений.
+        */
+
+        //Sorted lines
+        //Integer[] linesort;
+        //Integer[][] finlinesort = new Integer[n][n];
+        //Integer[][] finlinesort = Arrays.copyOf(resArray1, resArray1.length);
+        Integer[][] finlinesort = new Integer[n][n];
+
+
+        for (int i = 0; i < n; i++) {
+            //linesort = resArray1[i];
+            System.arraycopy(resArray1[i], 0, finlinesort[i], 0, resArray1.length);
+            Arrays.sort(finlinesort[i]);
+            //finlinesort[i] = linesort;
+        }
+        System.out.println("------ Matrix with sorted lines ------");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(finlinesort[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        //Sorted columns
+        Integer columnsort[] = new Integer[n];
+        Integer fincolsort[][] = new Integer[n][n];
+
+        System.out.println();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                columnsort[j] = resArray1[j][i];
+                //System.out.print(columnsort[j] + " ");
+            }
+            //System.out.println();
+            Arrays.sort(columnsort);
+            for (int j = 0; j < n; j++) {
+                fincolsort[j][i] = columnsort[j];
+            }
+        }
+        System.out.println("------ Matrix with sorted columns ------");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(fincolsort[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
