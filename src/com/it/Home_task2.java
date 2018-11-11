@@ -142,17 +142,13 @@ public class Home_task2 {
         */
 
         //Sorted lines
-        //Integer[] linesort;
-        //Integer[][] finlinesort = new Integer[n][n];
-        //Integer[][] finlinesort = Arrays.copyOf(resArray1, resArray1.length);
         Integer[][] finlinesort = new Integer[n][n];
 
 
         for (int i = 0; i < n; i++) {
-            //linesort = resArray1[i];
+
             System.arraycopy(resArray1[i], 0, finlinesort[i], 0, resArray1.length);
             Arrays.sort(finlinesort[i]);
-            //finlinesort[i] = linesort;
         }
         System.out.println("------ Matrix with sorted lines ------");
         for (int i = 0; i < n; i++) {
@@ -170,9 +166,7 @@ public class Home_task2 {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 columnsort[j] = resArray1[j][i];
-                //System.out.print(columnsort[j] + " ");
             }
-            //System.out.println();
             Arrays.sort(columnsort);
             for (int j = 0; j < n; j++) {
                 fincolsort[j][i] = columnsort[j];
