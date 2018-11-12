@@ -136,6 +136,7 @@ public class Home_task2 {
             System.out.println();
         }
         System.out.println();
+
         /*
         Task_2.9.1
         Упорядочить строки (столбцы) матрицы в порядке возрастания значений.
@@ -144,19 +145,13 @@ public class Home_task2 {
         //Sorted lines
         Integer[][] finlinesort = new Integer[n][n];
 
-
         for (int i = 0; i < n; i++) {
 
             System.arraycopy(resArray1[i], 0, finlinesort[i], 0, resArray1.length);
             Arrays.sort(finlinesort[i]);
         }
         System.out.println("------ Matrix with sorted lines ------");
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print(finlinesort[i][j] + " ");
-            }
-            System.out.println();
-        }
+        PrintMatrix(n, finlinesort);
 
         //Sorted columns
         Integer columnsort[] = new Integer[n];
@@ -173,9 +168,45 @@ public class Home_task2 {
             }
         }
         System.out.println("------ Matrix with sorted columns ------");
-        for (int i = 0; i < n; i++) {
+        PrintMatrix(n, fincolsort);
+        /*for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 System.out.print(fincolsort[i][j] + " ");
+            }
+            System.out.println();
+        }*/
+
+         /*
+        Task_2.9.2
+        Выполнить циклический сдвиг заданной матрицы на k позиций
+        Сдвиг вправо
+        */
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Please enter number for shift: ");
+        int step = scan.nextInt();
+        if (step > resArray1.length || step < 1) {
+            System.out.println("Shift is impossible");
+            return;
+        }
+        int buff, i, j;
+        for (int r = 0; r < step; r++) {
+            for (i = 0; i < resArray1.length; i++) {
+                buff = resArray1[i][0];
+                for (j = 0; j < resArray1.length - 1; j++) {
+                    resArray1[i][j] = resArray1[i][j + 1];
+                }
+                resArray1[i][j] = buff;
+            }
+        }
+        System.out.println("------ Matrix with shifted left ------");
+        PrintMatrix(n, resArray1);
+
+    }
+
+    private static void PrintMatrix(Integer n, Integer[][] matrix) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(matrix[i][j] + " ");
             }
             System.out.println();
         }
