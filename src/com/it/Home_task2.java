@@ -237,6 +237,7 @@ public class Home_task2 {
                 System.out.print(matrix[i][j] + " ");
             }
             System.out.println();
+
         }
     }
 }
