@@ -176,7 +176,7 @@ public class Home_task2 {
         Выполнить циклический сдвиг заданной матрицы на k позиций
         Сдвиг влево
         */
-        Integer ShiftLeft[][] = new Integer[n][n];
+        /*Integer ShiftLeft[][] = new Integer[n][n];
         for (int i = 0; i < n; i++) {
             System.arraycopy(resArray1[i], 0, ShiftLeft[i], 0, resArray1.length);
         }
@@ -200,10 +200,10 @@ public class Home_task2 {
         }
         System.out.println("------ Shifted left Matrix ------");
         PrintMatrix(n, ShiftLeft);
-        System.out.println();
+        System.out.println();*/
 
         //Сдвиг враво
-        Integer ShiftRight[][] = new Integer[n][n];
+        /*Integer ShiftRight[][] = new Integer[n][n];
         for (int i = 0; i < n; i++) {
             System.arraycopy(resArray1[i], 0, ShiftRight[i], 0, resArray1.length);
         }
@@ -228,8 +228,57 @@ public class Home_task2 {
         }
         System.out.println("------ Shifted right Matrix ------");
         PrintMatrix(n, ShiftRight);
+        System.out.println();*/
+
+        //Сдвиг вверх
+        /*Integer ShiftTop[][] = new Integer[n][n];
+        Integer TempShift[] = new Integer[n];
+        for (int i = 0; i < n; i++) {
+            System.arraycopy(resArray1[i], 0, ShiftTop[i], 0, resArray1.length);
+        }
+        Scanner scanT = new Scanner(System.in);
+        System.out.print("Please enter number for shift top: ");
+        int stepT = scanT.nextInt();
+        if (stepT > resArray1.length || stepT < 1) {
+            System.out.println("Shift is impossible");
+        } else {
+            for (int r = 0; r < stepT; r++) {
+                TempShift = ShiftTop[0];
+                for (int i = 0; i < ShiftTop.length - 1; i++) {
+                    ShiftTop[i] = ShiftTop[i + 1];
+                }
+                ShiftTop[ShiftTop.length - 1] = TempShift;
+            }
+        }
+        System.out.println("------ Shifted top Matrix ------");
+        PrintMatrix(n, ShiftTop);
+        System.out.println();*/
+
+        //Сдвиг вниз
+        Integer ShiftDown[][] = new Integer[n][n];
+        Integer TempShift[] = new Integer[n];
+        for (int i = 0; i < n; i++) {
+            System.arraycopy(resArray1[i], 0, ShiftDown[i], 0, resArray1.length);
+        }
+        Scanner scanD = new Scanner(System.in);
+        System.out.print("Please enter number for shift down: ");
+        int stepD = scanD.nextInt();
+        if (stepD > resArray1.length || stepD < 1) {
+            System.out.println("Shift is impossible");
+        } else {
+            for (int r = 0; r < stepD; r++) {
+                TempShift = ShiftDown[ShiftDown.length - 1];
+                for (int i = ShiftDown.length - 1; i > 0; i--) {
+                    ShiftDown[i] = ShiftDown[i - 1];
+                }
+                ShiftDown[0] = TempShift;
+            }
+        }
+        System.out.println("------ Shifted down Matrix ------");
+        PrintMatrix(n, ShiftDown);
         System.out.println();
     }
+
 
     private static void PrintMatrix(Integer n, Integer[][] matrix) {
         for (int i = 0; i < n; i++) {
