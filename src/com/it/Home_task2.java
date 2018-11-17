@@ -137,6 +137,8 @@ public class Home_task2 {
         }
         System.out.println();
 
+        inDecrease(resArray1);
+
         /*
         Task_2.9.1
         Упорядочить строки (столбцы) матрицы в порядке возрастания значений.
@@ -255,7 +257,7 @@ public class Home_task2 {
         System.out.println();*/
 
         //Сдвиг вниз
-        Integer ShiftDown[][] = new Integer[n][n];
+        /*Integer ShiftDown[][] = new Integer[n][n];
         Integer TempShift[] = new Integer[n];
         for (int i = 0; i < n; i++) {
             System.arraycopy(resArray1[i], 0, ShiftDown[i], 0, resArray1.length);
@@ -276,7 +278,48 @@ public class Home_task2 {
         }
         System.out.println("------ Shifted down Matrix ------");
         PrintMatrix(n, ShiftDown);
-        System.out.println();
+        System.out.println();*/
+    }
+
+    //Task_2.9.3
+    /*Найти и вывести наибольшее число возрастающих (убывающих) элементов матрицы, идущих подряд.*/
+    public static void inDecrease(Integer[][] b) {
+        int[] oneDimArray = new int[b.length * b.length];
+        int c = 0, r = 0, max = 0, h = 0, m = 0, min = 0, h1 = 0;
+        for (Integer[] x : b) {
+            for (int z : x) {
+                oneDimArray[c++] = z;
+            }
+        }
+        for (int i = 0; i < oneDimArray.length - 1; i++) {
+            if (oneDimArray[i] < oneDimArray[i + 1]) {
+                r += 1;
+                if (r > max) {
+                    max = r;
+                    h = i + 1;
+                }
+            } else {
+                r = 0;
+            }
+            if (oneDimArray[i] > oneDimArray[i + 1]) {
+                m += 1;
+                if (m > min) {
+                    min = m;
+                    h1 = i + 1;
+                }
+            } else {
+                m = 0;
+            }
+        }
+        int[] maxIncSeq = new int[max + 1];
+        int[] maxDecSeq = new int[min + 1];
+        System.arraycopy(oneDimArray, (h - max), maxIncSeq, 0, (max + 1));
+        System.arraycopy(oneDimArray, (h1 - min), maxDecSeq, 0, (min + 1));
+        System.out.println("Max sequence elements which are increasing: ");
+        System.out.println((max + 1) + " element(s)" + " -> " + Arrays.toString(maxIncSeq));
+        System.out.println("Max sequence elements which are decreasing: ");
+        System.out.println((min + 1) + " element(s)" + " -> " + Arrays.toString(maxDecSeq));
+
     }
 
 
