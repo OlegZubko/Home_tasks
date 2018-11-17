@@ -137,7 +137,8 @@ public class Home_task2 {
         }
         System.out.println();
 
-        inDecrease(resArray1);
+        //inDecrease(resArray1);
+        sumElements(resArray1);
 
         /*
         Task_2.9.1
@@ -283,7 +284,7 @@ public class Home_task2 {
 
     //Task_2.9.3
     /*Найти и вывести наибольшее число возрастающих (убывающих) элементов матрицы, идущих подряд.*/
-    public static void inDecrease(Integer[][] b) {
+    private static void inDecrease(Integer[][] b) {
         int[] oneDimArray = new int[b.length * b.length];
         int c = 0, r = 0, max = 0, h = 0, m = 0, min = 0, h1 = 0;
         for (Integer[] x : b) {
@@ -319,9 +320,46 @@ public class Home_task2 {
         System.out.println((max + 1) + " element(s)" + " -> " + Arrays.toString(maxIncSeq));
         System.out.println("Max sequence elements which are decreasing: ");
         System.out.println((min + 1) + " element(s)" + " -> " + Arrays.toString(maxDecSeq));
-
     }
 
+    //Task_2.9.4
+    /*Найти сумму элементов матрицы, расположенных между первым и вторым положительными элементами каждой строки.*/
+    private static void sumElements(Integer[][] resArray1) {
+        int posElements[] = new int[2];
+        int el, n, sum, j;
+        System.out.println("Sum of elements between first two positive elements:");
+        for (int i = 0; i < resArray1.length; i++) {
+            el = 0;
+            n = 0;
+            j = 0;
+            sum = 0;
+            posElements[1] = 0;
+            while (el != 2 & j != resArray1.length) {
+                if (resArray1[i][j] > 0) {
+                    posElements[n] = j;
+                    n++;
+                    el++;
+                } /*else if (j == resArray1.length - 1) {
+                    el = 2;
+                }*/
+                j++;
+            }
+            if (posElements[1] != 0) {
+                if (posElements[0] != posElements[1] - 1) {
+                    for (int k = posElements[0] + 1; k < posElements[1]; k++) {
+                        sum += resArray1[i][k];
+                    }
+                    System.out.println("Line " + i + ": Sum = " + sum);
+                } else {
+                    System.out.println("Line " + i + ": Sum = 00");
+                }
+
+            } else {
+                System.out.println("Line " + i + ": doesn't contain two positive elements");
+            }
+        }
+
+    }
 
     private static void PrintMatrix(Integer n, Integer[][] matrix) {
         for (int i = 0; i < n; i++) {
