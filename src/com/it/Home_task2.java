@@ -138,7 +138,8 @@ public class Home_task2 {
         System.out.println();
 
         //inDecrease(resArray1);
-        sumElements(resArray1);
+        //sumElements(resArray1);
+        rotateMatrix(resArray1);
 
         /*
         Task_2.9.1
@@ -360,6 +361,39 @@ public class Home_task2 {
         }
 
     }
+
+    /*Task_2.9.5.
+    Повернуть матрицу на 90 (180, 270) градусов против часовой стрелки.*/
+    private static void rotateMatrix(Integer[][] resArray1) {
+        System.out.print("Please select rotation in degree to left( 90 or 180 or 270) and enter it: ");
+        Scanner scan = new Scanner(System.in);
+        Integer rotation = scan.nextInt();
+        Integer temp[][] = new Integer[resArray1.length][resArray1.length];
+
+        if (rotation == 90 || rotation == 180 || rotation == 270) {
+            for (int i = 0; i < resArray1.length; i++) {
+                for (int j = 0; j < resArray1.length; j++) {
+                    switch (rotation) {
+                        case 90:
+                            temp[3 - j][i] = resArray1[i][j];
+                            break;
+                        case 180:
+                            temp[Math.abs(i - (resArray1.length - 1))][Math.abs(j - (resArray1.length - 1))] = resArray1[i][j];
+                            break;
+                        case 270:
+                            temp[j][resArray1.length - 1 - i] = resArray1[i][j];
+                            break;
+                    }
+                }
+            }
+            System.out.println("Matrix rotated for " + rotation + " degree");
+            PrintMatrix(resArray1.length, temp);
+        } else {
+            System.out.println("You entered incorrect value, please use 90 or 180 or 270.");
+        }
+
+    }
+
 
     private static void PrintMatrix(Integer n, Integer[][] matrix) {
         for (int i = 0; i < n; i++) {
