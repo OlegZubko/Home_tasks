@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class Home_task2 {
     public static void main(String[] args) {
@@ -125,7 +126,7 @@ public class Home_task2 {
         Scanner scan1 = new Scanner(System.in);
         System.out.print("Please enter number of dimensions: ");
         Integer n = scan1.nextInt();
-        Integer resArray1[][] = new Integer[n][n];
+        int resArray1[][] = new int[n][n];
         System.out.println("------ Initial matrix ------");
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -137,9 +138,10 @@ public class Home_task2 {
         }
         System.out.println();
 
-        //inDecrease(resArray1);
-        //sumElements(resArray1);
-        rotateMatrix(resArray1);
+        //inDecrease(resArray1); //run Task_2.9.3
+        //sumElements(resArray1); //run Task_2.9.4
+        //rotateMatrix(resArray1);//run Task_2.9.5
+        arithmeticAvg(resArray1);//run Task_2.9.6
 
         /*
         Task_2.9.1
@@ -281,14 +283,29 @@ public class Home_task2 {
         System.out.println("------ Shifted down Matrix ------");
         PrintMatrix(n, ShiftDown);
         System.out.println();*/
+
+
+    }
+    /*Task_2.9.6
+    Построить матрицу, вычитая из элементов каждой строки матрицы ее среднее арифметическое.*/
+    private static void arithmeticAvg(int[][] resArray1) {
+        for (int i = 0; i < resArray1.length; i++) {
+            int arithmeticAvg = IntStream.of(resArray1[i]).sum() / resArray1.length;
+            System.out.println("Arithmetic average for line " + i + " is equal to " + arithmeticAvg);
+            for (int j = 0; j < resArray1.length; j++) {
+                resArray1[i][j] = resArray1[i][j] - arithmeticAvg;
+            }
+        }
+        System.out.println("New matrix in which from each element subtracted arithmetical average of its line:");
+        PrintMatrix(resArray1.length, resArray1);
     }
 
     //Task_2.9.3
     /*Найти и вывести наибольшее число возрастающих (убывающих) элементов матрицы, идущих подряд.*/
-    private static void inDecrease(Integer[][] b) {
+    private static void inDecrease(int[][] b) {
         int[] oneDimArray = new int[b.length * b.length];
         int c = 0, r = 0, max = 0, h = 0, m = 0, min = 0, h1 = 0;
-        for (Integer[] x : b) {
+        for (int[] x : b) {
             for (int z : x) {
                 oneDimArray[c++] = z;
             }
@@ -325,7 +342,7 @@ public class Home_task2 {
 
     //Task_2.9.4
     /*Найти сумму элементов матрицы, расположенных между первым и вторым положительными элементами каждой строки.*/
-    private static void sumElements(Integer[][] resArray1) {
+    private static void sumElements(int[][] resArray1) {
         int posElements[] = new int[2];
         int el, n, sum, j;
         System.out.println("Sum of elements between first two positive elements:");
@@ -340,9 +357,7 @@ public class Home_task2 {
                     posElements[n] = j;
                     n++;
                     el++;
-                } /*else if (j == resArray1.length - 1) {
-                    el = 2;
-                }*/
+                }
                 j++;
             }
             if (posElements[1] != 0) {
@@ -364,11 +379,11 @@ public class Home_task2 {
 
     /*Task_2.9.5.
     Повернуть матрицу на 90 (180, 270) градусов против часовой стрелки.*/
-    private static void rotateMatrix(Integer[][] resArray1) {
+    private static void rotateMatrix(int[][] resArray1) {
         System.out.print("Please select rotation in degree to left( 90 or 180 or 270) and enter it: ");
         Scanner scan = new Scanner(System.in);
         Integer rotation = scan.nextInt();
-        Integer temp[][] = new Integer[resArray1.length][resArray1.length];
+        int temp[][] = new int[resArray1.length][resArray1.length];
 
         if (rotation == 90 || rotation == 180 || rotation == 270) {
             for (int i = 0; i < resArray1.length; i++) {
@@ -395,7 +410,7 @@ public class Home_task2 {
     }
 
 
-    private static void PrintMatrix(Integer n, Integer[][] matrix) {
+    private static void PrintMatrix(Integer n, int[][] matrix) {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 System.out.print(matrix[i][j] + " ");
