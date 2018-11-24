@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.*;
+import java.util.jar.JarEntry;
 import java.util.stream.IntStream;
 
 public class Home_task2 {
@@ -141,7 +142,8 @@ public class Home_task2 {
         //inDecrease(resArray1); //run Task_2.9.3
         //sumElements(resArray1); //run Task_2.9.4
         //rotateMatrix(resArray1);//run Task_2.9.5
-        arithmeticAvg(resArray1);//run Task_2.9.6
+        //arithmeticAvg(resArray1);//run Task_2.9.6
+        zeroElementsEnd(resArray1);//run Task_2.9.8
 
         /*
         Task_2.9.1
@@ -286,19 +288,6 @@ public class Home_task2 {
 
 
     }
-    /*Task_2.9.6
-    Построить матрицу, вычитая из элементов каждой строки матрицы ее среднее арифметическое.*/
-    private static void arithmeticAvg(int[][] resArray1) {
-        for (int i = 0; i < resArray1.length; i++) {
-            int arithmeticAvg = IntStream.of(resArray1[i]).sum() / resArray1.length;
-            System.out.println("Arithmetic average for line " + i + " is equal to " + arithmeticAvg);
-            for (int j = 0; j < resArray1.length; j++) {
-                resArray1[i][j] = resArray1[i][j] - arithmeticAvg;
-            }
-        }
-        System.out.println("New matrix in which from each element subtracted arithmetical average of its line:");
-        PrintMatrix(resArray1.length, resArray1);
-    }
 
     //Task_2.9.3
     /*Найти и вывести наибольшее число возрастающих (убывающих) элементов матрицы, идущих подряд.*/
@@ -407,6 +396,61 @@ public class Home_task2 {
             System.out.println("You entered incorrect value, please use 90 or 180 or 270.");
         }
 
+    }
+
+    /*Task_2.9.6
+    Построить матрицу, вычитая из элементов каждой строки матрицы ее среднее арифметическое.*/
+    private static void arithmeticAvg(int[][] resArray1) {
+        for (int i = 0; i < resArray1.length; i++) {
+            int arithmeticAvg = IntStream.of(resArray1[i]).sum() / resArray1.length;
+            System.out.println("Arithmetic average for line " + i + " is equal to " + arithmeticAvg);
+            for (int j = 0; j < resArray1.length; j++) {
+                resArray1[i][j] = resArray1[i][j] - arithmeticAvg;
+            }
+        }
+        System.out.println("New matrix in which from each element subtracted arithmetical average of its line:");
+        PrintMatrix(resArray1.length, resArray1);
+    }
+
+    /*Task_2.9.8.
+    Преобразовать строки матрицы таким образом, чтобы элементы, равные нулю, располагались после всех остальных.*/
+
+    private static void zeroElementsEnd(int[][] resArray1) {
+        int nullEl = 0;
+        int notNullEl;
+        System.out.println("Refactor lines of matrix so elements equal to 0, moved to the end of line");
+        for (int i = 0; i < resArray1.length; i++) {
+            for (int j = 0; j < resArray1.length; j++) {
+                if (resArray1[i][j] == 0 && j < resArray1.length - 1) {
+                    notNullEl = 0;
+                    for (int m = j + 1; m < resArray1.length; m++) {
+                        if (resArray1[i][m] != 0) {
+                            notNullEl++;
+                        }
+                    }
+                    if (notNullEl>0) {
+                        while (resArray1[i][j] == 0) {
+                            nullEl++;
+                            for (int k = j; k < resArray1.length - 1; k++) {
+                                resArray1[i][k] = resArray1[i][k + 1];
+                            }
+                            resArray1[i][resArray1.length - 1] = 0;
+
+                        }
+                    }
+                }
+            }
+
+        }
+
+        if (nullEl != 0) {
+            System.out.println("Matrix with elements equal to 0 are shifted to the end of line:");
+            PrintMatrix(resArray1.length, resArray1);
+        } else {
+            System.out.println("Matrix doesn't need to be changed:");
+            PrintMatrix(resArray1.length, resArray1);
+
+        }
     }
 
 
