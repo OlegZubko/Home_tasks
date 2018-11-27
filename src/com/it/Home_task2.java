@@ -1,10 +1,8 @@
 package com.it;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.*;
-import java.util.jar.JarEntry;
 import java.util.stream.IntStream;
 
 public class Home_task2 {
@@ -121,175 +119,161 @@ public class Home_task2 {
         }*/
 
 
-        //Task_2.9
-        //Ввести с консоли n-размерность матрицы a [n] [n].
-        //Задать значения элементов матрицы в интервале значений от -n до n с помощью датчика случайных чисел.
-        /*Scanner scan1 = new Scanner(System.in);
-        System.out.print("Please enter number of dimensions: ");
-        Integer n = scan1.nextInt();
-        int resArray1[][] = new int[n][n];
-        System.out.println("------ Initial matrix ------");
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                int a = new Random().ints(1, -n, n + 1).findFirst().getAsInt();
-                resArray1[i][j] = a;
-                System.out.print(resArray1[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();*/
+        MatrixGeneration matrixGeneration = new MatrixGeneration().invoke();
+        Integer n = matrixGeneration.getN();
+        int[][] resArray1 = matrixGeneration.getResArray1();
 
+        sorter(n, resArray1); //Task_2.9.1
+        shiftMatrix(n, resArray1); //run Task_2.9.2
         //inDecrease(resArray1); //run Task_2.9.3
         //sumElements(resArray1); //run Task_2.9.4
         //rotateMatrix(resArray1);//run Task_2.9.5
         //arithmeticAvg(resArray1);//run Task_2.9.6
-        tightenMatrix();//run Task_2.9.7
+        //tightenMatrix();//run Task_2.9.7
         //zeroElementsEnd(resArray1);//run Task_2.9.8
-
-        /*
-        Task_2.9.1
-        Упорядочить строки (столбцы) матрицы в порядке возрастания значений.
-        */
-        //Sorted lines
-        /*Integer[][] finlinesort = new Integer[n][n];
-
-        for (int i = 0; i < n; i++) {
-
-            System.arraycopy(resArray1[i], 0, finlinesort[i], 0, resArray1.length);
-            Arrays.sort(finlinesort[i]);
-        }
-        System.out.println("------ Matrix with sorted lines ------");
-        PrintMatrix(n, finlinesort);*/
-
-        //Sorted columns
-        /*Integer columnsort[] = new Integer[n];
-        Integer fincolsort[][] = new Integer[n][n];
-
-        System.out.println();
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                columnsort[j] = resArray1[j][i];
-            }
-            Arrays.sort(columnsort);
-            for (int j = 0; j < n; j++) {
-                fincolsort[j][i] = columnsort[j];
-            }
-        }
-        System.out.println("------ Matrix with sorted columns ------");
-        PrintMatrix(n, fincolsort);*/
-
-
-
-         /*
-        Task_2.9.2
-        Выполнить циклический сдвиг заданной матрицы на k позиций
-        Сдвиг влево
-        */
-        /*Integer ShiftLeft[][] = new Integer[n][n];
-        for (int i = 0; i < n; i++) {
-            System.arraycopy(resArray1[i], 0, ShiftLeft[i], 0, resArray1.length);
-        }
-        Scanner scanL = new Scanner(System.in);
-        System.out.print("Please enter number for shift left: ");
-        int stepL = scanL.nextInt();
-        if (stepL > ShiftLeft.length || stepL < 1) {
-            System.out.println("Shift is impossible");
-        } else {
-            int buff;
-            for (int r = 0; r < stepL; r++) {
-                for (int i = 0; i < ShiftLeft.length; i++) {
-                    buff = ShiftLeft[i][0];
-                    for (int j = 0; j < ShiftLeft.length - 1; j++) {
-                        ShiftLeft[i][j] = ShiftLeft[i][j + 1];
-                    }
-                    ShiftLeft[i][ShiftLeft.length - 1] = buff;
-                }
-            }
-
-        }
-        System.out.println("------ Shifted left Matrix ------");
-        PrintMatrix(n, ShiftLeft);
-        System.out.println();*/
-
-        //Сдвиг враво
-        /*Integer ShiftRight[][] = new Integer[n][n];
-        for (int i = 0; i < n; i++) {
-            System.arraycopy(resArray1[i], 0, ShiftRight[i], 0, resArray1.length);
-        }
-        Scanner scanR = new Scanner(System.in);
-        System.out.print("Please enter number for shift right: ");
-        int stepR = scanR.nextInt();
-        if (stepR > resArray1.length || stepR < 1) {
-            System.out.println("Shift is impossible");
-
-        } else {
-            int buff, i, j;
-            for (int r = 0; r < stepR; r++) {
-                for (i = 0; i < ShiftRight.length; i++) {
-                    buff = ShiftRight[i][ShiftRight.length - 1];
-                    for (j = ShiftRight.length - 1; j > 0; j--) {
-                        ShiftRight[i][j] = ShiftRight[i][j - 1];
-                    }
-                    ShiftRight[i][0] = buff;
-                }
-            }
-
-        }
-        System.out.println("------ Shifted right Matrix ------");
-        PrintMatrix(n, ShiftRight);
-        System.out.println();*/
-
-        //Сдвиг вверх
-        /*Integer ShiftTop[][] = new Integer[n][n];
-        Integer TempShift[] = new Integer[n];
-        for (int i = 0; i < n; i++) {
-            System.arraycopy(resArray1[i], 0, ShiftTop[i], 0, resArray1.length);
-        }
-        Scanner scanT = new Scanner(System.in);
-        System.out.print("Please enter number for shift top: ");
-        int stepT = scanT.nextInt();
-        if (stepT > resArray1.length || stepT < 1) {
-            System.out.println("Shift is impossible");
-        } else {
-            for (int r = 0; r < stepT; r++) {
-                TempShift = ShiftTop[0];
-                for (int i = 0; i < ShiftTop.length - 1; i++) {
-                    ShiftTop[i] = ShiftTop[i + 1];
-                }
-                ShiftTop[ShiftTop.length - 1] = TempShift;
-            }
-        }
-        System.out.println("------ Shifted top Matrix ------");
-        PrintMatrix(n, ShiftTop);
-        System.out.println();*/
-
-        //Сдвиг вниз
-        /*Integer ShiftDown[][] = new Integer[n][n];
-        Integer TempShift[] = new Integer[n];
-        for (int i = 0; i < n; i++) {
-            System.arraycopy(resArray1[i], 0, ShiftDown[i], 0, resArray1.length);
-        }
-        Scanner scanD = new Scanner(System.in);
-        System.out.print("Please enter number for shift down: ");
-        int stepD = scanD.nextInt();
-        if (stepD > resArray1.length || stepD < 1) {
-            System.out.println("Shift is impossible");
-        } else {
-            for (int r = 0; r < stepD; r++) {
-                TempShift = ShiftDown[ShiftDown.length - 1];
-                for (int i = ShiftDown.length - 1; i > 0; i--) {
-                    ShiftDown[i] = ShiftDown[i - 1];
-                }
-                ShiftDown[0] = TempShift;
-            }
-        }
-        System.out.println("------ Shifted down Matrix ------");
-        PrintMatrix(n, ShiftDown);
-        System.out.println();*/
-
 
     }
 
+    /*Task_2.9.1
+    Упорядочить строки (столбцы) матрицы в порядке возрастания значений. */
+    private static void sorter(Integer n, int[][] resArray1) {
+        Scanner scanSort = new Scanner(System.in);
+        System.out.print("Please select what you would like to sort: " + "\n" + "Sort line => 1" + "\n" + "Sort columns => 2" + "\n");
+        int sort = scanSort.nextInt();
+        int[][] finlinesort = new int[n][n];
+        int columnsort[] = new int[n];
+        int[][] fincolsort = new int[n][n];
+        switch (sort) {
+            case 1: //Sorted lines
+                for (int i = 0; i < n; i++) {
+                    System.arraycopy(resArray1[i], 0, finlinesort[i], 0, resArray1.length);
+                    Arrays.sort(finlinesort[i]);
+                }
+                System.out.println("------ Matrix with sorted lines ------");
+                PrintMatrix(n, finlinesort);
+                break;
+            case 2://Sorted columns
+                System.out.println();
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
+                        columnsort[j] = resArray1[j][i];
+                    }
+                    Arrays.sort(columnsort);
+                    for (int j = 0; j < n; j++) {
+                        fincolsort[j][i] = columnsort[j];
+                    }
+                }
+                System.out.println("------ Matrix with sorted columns ------");
+                PrintMatrix(n, fincolsort);
+                break;
+            default:
+                System.out.println("Impossible to sort, please use 1 or 2 to chose sort of lines or sort of columns!");
+        }
+        System.out.println();
+    }
+
+    /* Task_2.9.2
+    Выполнить циклический сдвиг заданной матрицы на k  */
+    private static void shiftMatrix(Integer n, int[][] resArray1) {
+        Scanner scanShift = new Scanner(System.in);
+        System.out.print("Please enter where you would like to shift Matrix: " + "\n" + "Shift left => 1" + "\n" + "Shift right => 2" + "\n" + "Shift top => 3" + "\n" + "Shift bottom => 4 " + "\n");
+        int shift = scanShift.nextInt();
+        Scanner scanL = new Scanner(System.in);
+        System.out.print("Please enter number of positions to shift: ");
+        int step = scanL.nextInt();
+        int buff;
+        if (step > resArray1.length || step < 1) {
+            System.out.println("Shift is impossible");
+        } else {
+            switch (shift) {
+                case 1: //shift left
+                    for (int r = 0; r < step; r++) {
+                        for (int i = 0; i < resArray1.length; i++) {
+                            buff = resArray1[i][0];
+                            System.arraycopy(resArray1[i], 1, resArray1[i], 0, resArray1.length - 1);
+                            resArray1[i][resArray1.length - 1] = buff;
+                        }
+                    }
+                    System.out.println("------ Shifted left Matrix ------");
+                    PrintMatrix(n, resArray1);
+                    System.out.println();
+                    break;
+                case 2: //shift right
+                    for (int r = 0; r < step; r++) {
+                        for (int i = 0; i < resArray1.length; i++) {
+                            buff = resArray1[i][resArray1.length - 1];
+                            System.arraycopy(resArray1[i], 0, resArray1[i], 1, resArray1.length - 1);
+                            resArray1[i][0] = buff;
+                        }
+                    }
+                    System.out.println("------ Shifted right Matrix ------");
+                    PrintMatrix(n, resArray1);
+                    System.out.println();
+                    break;
+                case 3: //shift top
+                    int TempShift[];
+                    for (int r = 0; r < step; r++) {
+                        TempShift = resArray1[0];
+                        System.arraycopy(resArray1, 1, resArray1, 0, resArray1.length - 1);
+                        resArray1[resArray1.length - 1] = TempShift;
+                    }
+                    System.out.println("------ Shifted top Matrix ------");
+                    PrintMatrix(n, resArray1);
+                    System.out.println();
+                    break;
+                case 4: //shift bottom
+                    for (int r = 0; r < step; r++) {
+                        TempShift = resArray1[resArray1.length - 1];
+                        for (int i = resArray1.length - 1; i > 0; i--) {
+                            resArray1[i] = resArray1[i - 1];
+                        }
+                        resArray1[0] = TempShift;
+                    }
+                    System.out.println("------ Shifted down Matrix ------");
+                    PrintMatrix(n, resArray1);
+                    System.out.println();
+                    break;
+                default:
+                    System.out.println("Shift is impossible, please use 1-4 for direction to shift!");
+                    break;
+
+            }
+        }
+    }
+
+    /*Task_2.9
+    Ввести с консоли n-размерность матрицы a [n] [n].
+    Задать значения элементов матрицы в интервале значений от -n до n с помощью датчика случайных чисел.*/
+    static class MatrixGeneration {
+        private Integer n;
+        private int[][] resArray1;
+
+        public Integer getN() {
+            return n;
+        }
+
+        public int[][] getResArray1() {
+            return resArray1;
+        }
+
+        public MatrixGeneration invoke() {
+            Scanner scan1 = new Scanner(System.in);
+            System.out.print("Please enter number of dimensions: ");
+            n = scan1.nextInt();
+            resArray1 = new int[n][n];
+            System.out.println("------ Initial matrix ------");
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    int a = new Random().ints(1, -n, n + 1).findFirst().getAsInt();
+                    resArray1[i][j] = a;
+                    System.out.print(resArray1[i][j] + " ");
+                }
+                System.out.println();
+            }
+            System.out.println();
+            return this;
+        }
+    }
 
     //Task_2.9.3
     /*Найти и вывести наибольшее число возрастающих (убывающих) элементов матрицы, идущих подряд.*/
@@ -506,7 +490,8 @@ public class Home_task2 {
                 System.out.print(matrix[i][j] + " ");
             }
             System.out.println();
-
         }
     }
+
+
 }
