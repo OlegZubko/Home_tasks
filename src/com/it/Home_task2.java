@@ -124,7 +124,7 @@ public class Home_task2 {
         //Task_2.9
         //Ввести с консоли n-размерность матрицы a [n] [n].
         //Задать значения элементов матрицы в интервале значений от -n до n с помощью датчика случайных чисел.
-        Scanner scan1 = new Scanner(System.in);
+        /*Scanner scan1 = new Scanner(System.in);
         System.out.print("Please enter number of dimensions: ");
         Integer n = scan1.nextInt();
         int resArray1[][] = new int[n][n];
@@ -137,13 +137,14 @@ public class Home_task2 {
             }
             System.out.println();
         }
-        System.out.println();
+        System.out.println();*/
 
         //inDecrease(resArray1); //run Task_2.9.3
         //sumElements(resArray1); //run Task_2.9.4
         //rotateMatrix(resArray1);//run Task_2.9.5
         //arithmeticAvg(resArray1);//run Task_2.9.6
-        zeroElementsEnd(resArray1);//run Task_2.9.8
+        tightenMatrix();//run Task_2.9.7
+        //zeroElementsEnd(resArray1);//run Task_2.9.8
 
         /*
         Task_2.9.1
@@ -289,6 +290,7 @@ public class Home_task2 {
 
     }
 
+
     //Task_2.9.3
     /*Найти и вывести наибольшее число возрастающих (убывающих) элементов матрицы, идущих подряд.*/
     private static void inDecrease(int[][] b) {
@@ -412,9 +414,54 @@ public class Home_task2 {
         PrintMatrix(resArray1.length, resArray1);
     }
 
+    /*Task_2.9.7.
+    Уплотнить матрицу, удаляя из нее строки и столбцы, заполненные нулями.*/
+    private static void tightenMatrix() {
+        //int testMatrix[][] = new int[n][n];
+        int n = 4;
+        int testMatrix[][] = {{0, 3, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 65, 0, 0}};
+        int zeroLine[] = new int[n];
+        int zeroColumn[] = new int[n];
+        int zeroLineEl, zeroColEl;
+        int l = 0;
+        int c = 0;
+        System.out.println("Initial matrix:");
+        PrintMatrix(n, testMatrix);
+        /*for (int i = 0; i < zeroLine.length; i++) {
+            zeroLine[i] = -1;
+            zeroColumn[i] = -1;
+        }*/
+        for (int i = 0; i < testMatrix.length; i++) {
+            zeroLineEl = 0;
+            zeroColEl = 0;
+            for (int j = 0; j < testMatrix.length; j++) {
+                if (testMatrix[i][j] == 0) {
+                    zeroLineEl++;
+                }
+                if (testMatrix[j][i] == 0) {
+                    zeroColEl++;
+                }
+            }
+            if (zeroLineEl != testMatrix.length) {
+                zeroLine[l] = i;
+                l++;
+            }
+            if (zeroColEl != testMatrix.length) {
+                zeroColumn[c] = i;
+                c++;
+            }
+        }
+        System.out.println("Result Matrix with removed lines and columns which contain only zeroes:");
+        for (int i = 0; i < l; i++) {
+            for (int j = 0; j < c; j++) {
+                System.out.print(testMatrix[zeroLine[i]][zeroColumn[j]] + " ");
+            }
+            System.out.println();
+        }
+    }
+
     /*Task_2.9.8.
     Преобразовать строки матрицы таким образом, чтобы элементы, равные нулю, располагались после всех остальных.*/
-
     private static void zeroElementsEnd(int[][] resArray1) {
         int nullEl = 0;
         int notNullEl;
@@ -428,7 +475,7 @@ public class Home_task2 {
                             notNullEl++;
                         }
                     }
-                    if (notNullEl>0) {
+                    if (notNullEl > 0) {
                         while (resArray1[i][j] == 0) {
                             nullEl++;
                             for (int k = j; k < resArray1.length - 1; k++) {
@@ -452,7 +499,6 @@ public class Home_task2 {
 
         }
     }
-
 
     private static void PrintMatrix(Integer n, int[][] matrix) {
         for (int i = 0; i < n; i++) {
